@@ -1,0 +1,21 @@
+2017/07/26 23:18:24.690 Info   Starting JoyToKey Ver5.9
+2017/07/26 23:18:24.690 Info   ExeFile=C:\Users\rnpet-gerenteADM\Desktop\Felipe\POTIGOL\Utilitario\JoyToKey_en\JoyToKey_en\JoyToKey.exe
+2017/07/26 23:18:24.690 Info   ConfigDir=C:\Users\rnpet-gerenteADM\Desktop\Felipe\POTIGOL\Utilitario\JoyToKey_en\JoyToKey_en\
+2017/07/26 23:18:24.690 Info   IniFile=C:\Users\rnpet-gerenteADM\Desktop\Felipe\POTIGOL\Utilitario\JoyToKey_en\JoyToKey_en\JoyToKey.ini
+2017/07/26 23:18:24.690 Info   Windows Version = 6.2
+2017/07/26 23:18:24.690 Info   Loaded VistaAPI.dll (Utils\Utils.cpp#226)
+2017/07/26 23:18:24.690 Info   LicenseKey "" is not valid
+2017/07/26 23:18:25.005 Info   Loading XInput1_3.dll (Joystick.cpp#128)
+2017/07/26 23:18:25.005 Error  Could not load XInput1_3.dll. Trying to load XInput1_4.dll... (Joystick.cpp#132)
+2017/07/26 23:18:25.036 Info   Initialized XInput (Joystick.cpp#146)
+2017/07/26 23:18:25.136 Info   Detected a XI joystick: XInput-0
+2017/07/26 23:18:25.136 Info   Preferred index = -1
+2017/07/26 23:18:25.136 Info   DetectJoysticks: Detected 1 XI joystick(s)
+2017/07/26 23:18:25.884 Info   Detected a DI joystick: {B8C7F490-7258-11E7-8004-444553540000}, Controller (XBOX 360 For Windows), Controller (XBOX 360 For Windows)
+2017/07/26 23:18:25.885 Info   It is an XInput device, so skipping...
+2017/07/26 23:18:25.885 Info   Joystick #1: XInput Device #1
+2017/07/26 23:18:25.885 Info   1 joysticks are detected (Joystick.cpp#168)
+2017/07/26 23:18:25.885 Info   ConfigDir=C:\Users\rnpet-gerenteADM\Desktop\Felipe\POTIGOL\Utilitario\JoyToKey_en\JoyToKey_en\*.cfg (ConfigFileManager.cpp#43)
+2017/07/26 23:18:25.887 Info   Failed to find AppLink.dat (AppLink\AppLinkManager.cpp#32)
+2017/07/26 23:18:25.905 Info   TimerInit: Initializing timer with x1 speed mode (interval = 16 msec)
+2017/07/26 23:23:16.649 Info   Application terminated (Utils\LogFile.cpp#20)
