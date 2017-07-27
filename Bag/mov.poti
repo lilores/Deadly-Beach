@@ -1,0 +1,19 @@
+use "jerimum"
+
+var zombie = Imagem("infectado.png").fatie(223, 248)
+var exibir := zombie[1]
+andar()
+  n = (Relogio.agora div 60 mod zombie.tamanho + 1).inteiro
+   exibir := zombie[n]
+fim
+
+desenhe()
+ exibir.desenhe(50, 50,1)
+fim
+
+atualize()
+  se Teclado.TECLA_PARA_DIREITA entao
+    andar
+  fim
+fim
+jogo.iniciar("Teste", 960, 550, atualize, desenhe, 60)
