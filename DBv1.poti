@@ -1,0 +1,110 @@
+use "jerimum"
+
+fundo = Imagem("Background.png")
+var personagem := Imagem("Thomas01.png")
+var bolsa := Imagem("bolsa01.png")
+var zombie = Imagem("infectado.png").fatie(223, 248)
+var exibir := zombie[1]
+
+var soldadox := jogo.largura / 0.7
+var soldadoy := jogo.altura / 2
+
+###
+telainicio = Imagem("initialscreen.png")
+var estado := "INICIO"
+###
+
+desenhe()
+  escolha estado
+    caso "INICIO"  => desenhe_inicio
+    caso "JOGANDO" => desenhe_jogando
+    caso _         => desenhe_fim
+  fim
+fim
+
+atualize()
+  escolha estado
+    caso "INICIO"  => atualize_inicio
+    caso "JOGANDO" => atualize_jogando
+    caso _         => atualize_fim
+  fim
+fim
+
+
+# Estado: inicio do jogo
+atualize_inicio()
+  se Teclado.TECLA_ESPACO então estado := "JOGANDO" fim
+fim
+
+desenhe_inicio()
+ telainicio.desenhe(0, 0, 0)
+fim
+
+andar()
+  n = (Relogio.agora div 60 mod zombie.tamanho + 1).inteiro
+   exibir := zombie[n]
+fim
+
+atualize_jogando()
+  andar
+  se teclado.TECLA_PARA_DIREITA então
+    soldadox := soldadox + 10
+    se soldadox > jogo.largura - 210 então
+      soldadox := jogo.largura - 210
+    fim
+  fim
+  se teclado.TECLA_PARA_ESQUERDA então
+    soldadox := soldadox - 10
+    se soldadox < 10 então
+      soldadox := 0
+    fim
+  fim
+  se teclado.TECLA_PARA_BAIXO então
+    soldadoy := soldadoy + 10
+    se soldadoy > jogo.altura - 210 então
+      soldadoy := jogo.altura - 210
+    fim
+  fim
+  se teclado.TECLA_PARA_CIMA então
+    soldadoy := soldadoy - 10
+    se soldadoy < 10 então
+      soldadoy := 0
+    fim
+  fim
+  se teclado.TECLA_B então
+    personagem := Imagem("Thomas02.png")
+    se teclado.TECLA_B então
+      bolsa := Imagem("bolsa02.png")
+    fim
+  fim
+  se teclado.TECLA_V então
+    personagem := Imagem("Thomas01.png")
+    se teclado.TECLA_V então
+      bolsa := Imagem("bolsa01.png")
+    fim
+  fim
+fim
+
+desenhe_jogando()
+ fundo.desenhe(0, 0, 1)
+ personagem.desenhe(soldadox, soldadoy, 3)
+
+ exibir.desenhe(50, 50, 3)
+ exibir.desenhe(300, 500, 3)
+ exibir.desenhe(270, 270, 3)
+ exibir.desenhe(-10, 420, 3)
+ exibir.desenhe(370, -10, 3)
+
+ bolsa.desenhe(950, 0, 2)
+fim
+
+desenhe_fim()
+ telainicio.desenhe(0, 0, 0)
+fim
+
+atualize_fim()
+  se Teclado.TECLA_ESPACO então estado := "JOGANDO" fim
+fim
+
+
+jogo.iniciar("Deadly Beach", 1400, 640, atualize, desenhe, 60)

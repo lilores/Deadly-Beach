@@ -1,0 +1,171 @@
+use "jerimum"
+
+fundo = Imagem("Background.png")
+var personagem := Imagem("Thomas01.png")
+var bolsa := Imagem("bolsa01.png")
+var zombie = Imagem("infectado.png").fatie(223, 248)
+var exibir := zombie[1]
+tiro = Imagem("tiro.png")
+var soldadox := jogo.largura / 0.7
+var soldadoy := jogo.altura / 2
+
+var arma_c = 50
+var tiros_dados := arma_c
+
+var zombies = [
+      [50, 50],
+      [300, 500],
+      [270, 270],
+      [-10, 420],
+      [370, -10]
+    ]
+
+###
+telainicio = Imagem("initialscreen.png")
+var estado := "INICIO"
+###
+
+## Tipos
+tipo Tiro
+  # Construtor
+  var x, y: Real
+  sprite: Imagem
+
+  var acertou = falso
+
+  # Metodos
+  atualizar()
+    se acertou == falso então
+      x := x - 50
+    fim
+  fim
+
+  desenhar()
+    se acertou == falso então
+      sprite.desenhe_centralizado(x + 30, y + 52, 5)
+    fim
+  fim
+
+fim
+
+var tiros = Lista(0, Tiro(0, 0, tiro))
+
+desenhe()
+  escolha estado
+    caso "INICIO"  => desenhe_inicio
+    caso "JOGANDO" => desenhe_jogando
+    caso _         => desenhe_fim
+  fim
+
+  para iii de 1 até tiros.tamanho faça
+    tiros[iii].desenhar()
+  fim
+fim
+
+atualize()
+  escolha estado
+    caso "INICIO"  => atualize_inicio
+    caso "JOGANDO" => atualize_jogando
+    caso _         => atualize_fim
+  fim
+
+  para iii de 1 até tiros.tamanho faça
+    tiros[iii].atualizar()
+  fim
+fim
+
+
+# Estado: inicio do jogo
+atualize_inicio()
+  se Teclado.TECLA_ENTER então estado := "JOGANDO" fim
+fim
+
+desenhe_inicio()
+ telainicio.desenhe(0, 0, 0)
+fim
+
+andar()
+  n = (Relogio.agora div 60 mod zombie.tamanho + 1).inteiro
+   exibir := zombie[n]
+fim
+
+atualize_jogando()
+  andar
+  se teclado.TECLA_PARA_DIREITA então
+    soldadox := soldadox + 10
+    se soldadox > jogo.largura - 210 então
+      soldadox := jogo.largura - 210
+    fim
+  fim
+  se teclado.TECLA_PARA_ESQUERDA então
+    soldadox := soldadox - 10
+    se soldadox < 10 então
+      soldadox := 0
+    fim
+  fim
+  se teclado.TECLA_PARA_BAIXO então
+    soldadoy := soldadoy + 10
+    se soldadoy > jogo.altura - 210 então
+      soldadoy := jogo.altura - 210
+    fim
+  fim
+  se teclado.TECLA_PARA_CIMA então
+    soldadoy := soldadoy - 10
+    se soldadoy < 10 então
+      soldadoy := 0
+    fim
+  fim
+  se teclado.TECLA_B então
+    personagem := Imagem("Thomas02.png")
+    se teclado.TECLA_B então
+      bolsa := Imagem("bolsa02.png")
+    fim
+    arma_c := 10
+  fim
+  se teclado.TECLA_V então
+    personagem := Imagem("Thomas01.png")
+    se teclado.TECLA_V então
+      bolsa := Imagem("bolsa01.png")
+    fim
+    arma_c := 50
+  fim
+  se teclado.TECLA_ESPACO então
+    se tiros_dados > arma_c então
+      tiros_dados := 0
+      tirinho = Tiro(soldadox, soldadoy, tiro)
+      tiros := tiros + [tirinho]
+    senão
+      tiros_dados := tiros_dados + 1
+    fim
+  senão
+    tiros_dados := arma_c
+  fim
+fim
+
+desenhe_jogando()
+ fundo.desenhe(0, 0, 1)
+ personagem.desenhe(soldadox, soldadoy, 3)
+
+ para zd de 1 até zombies.tamanho faça
+  exibir.desenhe(zombies[zd][1], zombies[zd][2], 3)
+ fim
+
+ #exibir.desenhe(50, 50, 3)
+ #exibir.desenhe(300, 500, 3)
+ #exibir.desenhe(270, 270, 3)
+ #exibir.desenhe(-10, 420, 3)
+ #exibir.desenhe(370, -10, 3)
+
+ bolsa.desenhe(950, 0, 10)
+fim
+
+desenhe_fim()
+ telainicio.desenhe(0, 0, 0)
+fim
+
+atualize_fim()
+  se Teclado.TECLA_ESPACO então estado := "JOGANDO" fim
+fim
+
+
+jogo.iniciar("Deadly Beach", 1400, 640, atualize, desenhe, 60)
