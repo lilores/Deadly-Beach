@@ -6,6 +6,7 @@ var bolsa := Imagem("bolsa01.png")
 var zombie = Imagem("infectado.png").fatie(223, 248)
 var exibir := zombie[1]
 
+
 var soldadox := jogo.largura / 0.7
 var soldadoy := jogo.altura / 2
 
