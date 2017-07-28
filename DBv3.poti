@@ -9,6 +9,7 @@ tiro = Imagem("tiro.png")
 var soldadox := jogo.largura / 0.7
 var soldadoy := jogo.altura / 2
 
+#TIROS#
 var arma_c = 50
 var tiros_dados := arma_c
 
